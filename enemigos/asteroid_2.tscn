@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://bdk2wufdcxje4"]
+
+[ext_resource type="Texture2D" uid="uid://bgvka0otps30p" path="res://assets/enemigos/asteroide2_explotando_1.png" id="1_0p88v"]
+[ext_resource type="Texture2D" uid="uid://bj0gxtrwrlwee" path="res://assets/enemigos/asteroide2_explotando_2.png" id="2_isagw"]
+[ext_resource type="AudioStream" uid="uid://dvyqui3wx5uev" path="res://assets/sonido/explosion_enemigos.mp3" id="3_5quov"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4u4ej"]
+load_path = "res://.godot/imported/asteroide_2.png-0e947df6e2e1d994a969b81b8115a9bc.ctex"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_krpui"]
+radius = 72.0
+height = 286.0
+
+[sub_resource type="Animation" id="Animation_q1o8t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CompressedTexture2D_4u4ej")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o5ect"]
+resource_name = "destruccion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [SubResource("CompressedTexture2D_4u4ej"), ExtResource("1_0p88v"), ExtResource("2_isagw")]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_5quov")
+}],
+"times": PackedFloat32Array(0.3)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cf3ba"]
+_data = {
+&"RESET": SubResource("Animation_q1o8t"),
+&"destruccion": SubResource("Animation_o5ect")
+}
+
+[node name="Asteroid2" type="RigidBody2D" unique_id=981707674]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1912328982]
+texture = SubResource("CompressedTexture2D_4u4ej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=103235468]
+position = Vector2(-16, -30)
+shape = SubResource("CapsuleShape2D_krpui")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=632119188]
+libraries/ = SubResource("AnimationLibrary_cf3ba")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=755402123]

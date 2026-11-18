@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://c07w8khli1juc"]
+
+[ext_resource type="Texture2D" uid="uid://ctjkk1it8oamx" path="res://assets/enemigos/municion_enemiga_chocando_1.png" id="1_hsm3n"]
+[ext_resource type="Texture2D" uid="uid://dkiwh7vrkidso" path="res://assets/enemigos/municion_enemiga_chocando_2.png" id="2_8lk2y"]
+[ext_resource type="Texture2D" uid="uid://dge4j7rnxn4py" path="res://assets/enemigos/municion_enemiga_chocando_3.png" id="3_vesdf"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lf1x5"]
+load_path = "res://.godot/imported/municion_enemiga.png-50ebf76b087ab63b9f8dcfef5ab5c1b2.ctex"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_krpui"]
+radius = 75.0
+height = 254.0
+
+[sub_resource type="Animation" id="Animation_qolkw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CompressedTexture2D_lf1x5")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kgtl7"]
+resource_name = "impacto"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("CompressedTexture2D_lf1x5"), ExtResource("1_hsm3n"), ExtResource("2_8lk2y"), ExtResource("3_vesdf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6ulv"]
+_data = {
+&"RESET": SubResource("Animation_qolkw"),
+&"impacto": SubResource("Animation_kgtl7")
+}
+
+[node name="balas_enemigas" type="RigidBody2D" unique_id=1086714431]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=471384107]
+texture = SubResource("CompressedTexture2D_lf1x5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954022172]
+position = Vector2(-1, -32)
+shape = SubResource("CapsuleShape2D_krpui")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2073498288]
+libraries/ = SubResource("AnimationLibrary_h6ulv")

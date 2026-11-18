@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://btsrh37qbgmwd"]
+
+[ext_resource type="Texture2D" uid="uid://clrm4meswp5p2" path="res://assets/fondos/background.png" id="1_d4ujm"]
+[ext_resource type="PackedScene" uid="uid://dgykp4mwqvxc6" path="res://personaje/nave.tscn" id="2_w6qyd"]
+[ext_resource type="Script" uid="uid://btooaej60raaq" path="res://niveles/spawn_asteroides.gd" id="3_2iqk4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5bk5"]
+size = Vector2(20, 658)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kddjp"]
+size = Vector2(1154, 20)
+
+[node name="Nivel1" type="Node2D" unique_id=1117537824]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=517821525]
+repeat_size = Vector2(1152, 713)
+autoscroll = Vector2(0, 100)
+repeat_times = 2
+
+[node name="Background" type="Sprite2D" parent="Parallax2D" unique_id=287425840]
+position = Vector2(584, 329)
+texture = ExtResource("1_d4ujm")
+
+[node name="bordes" type="Node2D" parent="." unique_id=472655435]
+
+[node name="borde_izquierda" type="StaticBody2D" parent="bordes" unique_id=1066004900]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_izquierda" unique_id=704759683]
+position = Vector2(-12, 326)
+shape = SubResource("RectangleShape2D_u5bk5")
+one_way_collision = true
+one_way_collision_direction = Vector2(-1, 0)
+
+[node name="borde_derecha" type="StaticBody2D" parent="bordes" unique_id=127072637]
+position = Vector2(1175, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_derecha" unique_id=207021089]
+position = Vector2(-12, 326)
+shape = SubResource("RectangleShape2D_u5bk5")
+one_way_collision = true
+one_way_collision_direction = Vector2(1, 0)
+
+[node name="borde_top" type="StaticBody2D" parent="bordes" unique_id=1957245907]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_top" unique_id=1847375069]
+position = Vector2(579, -11)
+shape = SubResource("RectangleShape2D_kddjp")
+disabled = true
+one_way_collision = true
+one_way_collision_direction = Vector2(0, -1)
+
+[node name="borde_bottom" type="StaticBody2D" parent="bordes" unique_id=38353104]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_bottom" unique_id=1540693937]
+position = Vector2(579, 660)
+shape = SubResource("RectangleShape2D_kddjp")
+one_way_collision = true
+
+[node name="Nave" parent="." unique_id=77544392 instance=ExtResource("2_w6qyd")]
+position = Vector2(554.99994, 602.99994)
+scale = Vector2(0.1, 0.1)
+
+[node name="SpawnAsteroides" type="Node2D" parent="." unique_id=386551434]
+position = Vector2(275, -109)
+script = ExtResource("3_2iqk4")
+
+[node name="Timer" type="Timer" parent="SpawnAsteroides" unique_id=1614576492]
+autostart = true
+
+[node name="SpawnAsteroides2" type="Node2D" parent="." unique_id=240115020]
+position = Vector2(900, -103)
+script = ExtResource("3_2iqk4")
+
+[node name="Timer" type="Timer" parent="SpawnAsteroides2" unique_id=391542699]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="SpawnAsteroides/Timer" to="SpawnAsteroides" method="_on_timer_timeout"]
+[connection signal="timeout" from="SpawnAsteroides2/Timer" to="SpawnAsteroides2" method="_on_timer_timeout"]
