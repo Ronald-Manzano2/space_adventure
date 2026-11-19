@@ -9,7 +9,7 @@ const VIDA_COMPLETA = preload("uid://d1oyanyug0ssc")
 @onready var pantalla_pausa = $PantallaPausa
 signal boton_disparando
 
-@onready var boton_disparo = $BotonAtacar
+@onready var boton_disparo = $AnclaBoton/BotonAtacar
 
 func _ready() -> void:
 	pantalla_pausa.hide()

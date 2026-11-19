@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var destion_final = 200
+@export var destion_final = 225
 @onready var timer: Timer = $Timer
 
 # Called when the node enters the scene tree for the first time.

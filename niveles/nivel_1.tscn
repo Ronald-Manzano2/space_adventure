@@ -126,7 +126,7 @@ autostart = true
 position = Vector2(554.99994, 602.99994)
 
 [node name="TerceraOleada" type="Node2D" parent="." unique_id=465504004]
-position = Vector2(580, -214)
+position = Vector2(703, -211)
 script = ExtResource("11_j8syj")
 
 [node name="Nave_jefe_final" parent="TerceraOleada" unique_id=1481369433 instance=ExtResource("11_vdios")]

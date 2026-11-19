@@ -69,5 +69,7 @@ func _on_body_entered(body: Node) -> void:
 			life = life - 1
 		elif life <= 0:
 			ya_destruida = true
+			set_process(false)
+			set_physics_process(false)
 			animation_player.play("destruccion")
 			destroyed.emit(true)
