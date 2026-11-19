@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://o6cyndsfnia0"]
+
+[ext_resource type="AudioStream" uid="uid://drqhci0s1ck75" path="res://assets/sonido/Disfigure - Blank [NCS Release].mp3" id="1_prmm5"]
+
+[node name="PistaAudio" type="AudioStreamPlayer" unique_id=151689774]
+stream = ExtResource("1_prmm5")
+volume_db = -35.313
+autoplay = true
+parameters/looping = true

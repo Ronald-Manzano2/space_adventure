@@ -3,6 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://clrm4meswp5p2" path="res://assets/fondos/background.png" id="1_d4ujm"]
 [ext_resource type="PackedScene" uid="uid://dgykp4mwqvxc6" path="res://personaje/nave.tscn" id="2_w6qyd"]
 [ext_resource type="Script" uid="uid://btooaej60raaq" path="res://niveles/spawn_asteroides.gd" id="3_2iqk4"]
+[ext_resource type="PackedScene" uid="uid://gqgjevnf4f0o" path="res://enemigos/naves_enemigas.tscn" id="4_eu3iu"]
+[ext_resource type="Script" uid="uid://cu68nxvgyc60a" path="res://niveles/enemigos_iniciales.gd" id="4_i43ji"]
+[ext_resource type="Script" uid="uid://v0f1dj6us34p" path="res://niveles/segunda_ola_enemigos.gd" id="4_yi6tr"]
+[ext_resource type="PackedScene" uid="uid://o6cyndsfnia0" path="res://niveles/pista_audio.tscn" id="6_adjju"]
+[ext_resource type="PackedScene" uid="uid://dtdgyuvbpixxm" path="res://ui/pantalla_pausa.tscn" id="8_j8syj"]
+[ext_resource type="PackedScene" uid="uid://c6su541ki6jkt" path="res://ui/canvas_layer.tscn" id="8_uxua8"]
+[ext_resource type="Script" uid="uid://klw6l1pjbum3" path="res://niveles/game_controller.gd" id="9_c6ufc"]
+[ext_resource type="Script" uid="uid://bgmfc1lnvo3ul" path="res://niveles/tercera_oleada.gd" id="11_j8syj"]
+[ext_resource type="PackedScene" uid="uid://dt7x5lnrw6vig" path="res://enemigos/nave_jefe_final.tscn" id="11_vdios"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5bk5"]
 size = Vector2(20, 658)
@@ -24,41 +33,37 @@ texture = ExtResource("1_d4ujm")
 [node name="bordes" type="Node2D" parent="." unique_id=472655435]
 
 [node name="borde_izquierda" type="StaticBody2D" parent="bordes" unique_id=1066004900]
+collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_izquierda" unique_id=704759683]
 position = Vector2(-12, 326)
 shape = SubResource("RectangleShape2D_u5bk5")
-one_way_collision = true
 one_way_collision_direction = Vector2(-1, 0)
 
 [node name="borde_derecha" type="StaticBody2D" parent="bordes" unique_id=127072637]
 position = Vector2(1175, -7)
+collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_derecha" unique_id=207021089]
 position = Vector2(-12, 326)
 shape = SubResource("RectangleShape2D_u5bk5")
-one_way_collision = true
 one_way_collision_direction = Vector2(1, 0)
 
 [node name="borde_top" type="StaticBody2D" parent="bordes" unique_id=1957245907]
+collision_layer = 32
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_top" unique_id=1847375069]
 position = Vector2(579, -11)
 shape = SubResource("RectangleShape2D_kddjp")
-disabled = true
-one_way_collision = true
 one_way_collision_direction = Vector2(0, -1)
 
 [node name="borde_bottom" type="StaticBody2D" parent="bordes" unique_id=38353104]
+collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bordes/borde_bottom" unique_id=1540693937]
 position = Vector2(579, 660)
 shape = SubResource("RectangleShape2D_kddjp")
-one_way_collision = true
-
-[node name="Nave" parent="." unique_id=77544392 instance=ExtResource("2_w6qyd")]
-position = Vector2(554.99994, 602.99994)
-scale = Vector2(0.1, 0.1)
 
 [node name="SpawnAsteroides" type="Node2D" parent="." unique_id=386551434]
 position = Vector2(275, -109)
@@ -75,5 +80,72 @@ script = ExtResource("3_2iqk4")
 wait_time = 1.5
 autostart = true
 
+[node name="SegundaOlaEnemigos" type="Node2D" parent="." unique_id=673922193]
+position = Vector2(505, -19)
+script = ExtResource("4_yi6tr")
+
+[node name="Timer" type="Timer" parent="SegundaOlaEnemigos" unique_id=1965883309]
+wait_time = 10.0
+one_shot = true
+
+[node name="Naves_enemigas" parent="SegundaOlaEnemigos" unique_id=1775768576 instance=ExtResource("4_eu3iu")]
+position = Vector2(74, -130)
+
+[node name="Naves_enemigas2" parent="SegundaOlaEnemigos" unique_id=572107223 instance=ExtResource("4_eu3iu")]
+position = Vector2(-303, -144)
+
+[node name="Naves_enemigas3" parent="SegundaOlaEnemigos" unique_id=636484674 instance=ExtResource("4_eu3iu")]
+position = Vector2(431, -130)
+
+[node name="EnemigosIniciales" type="Node2D" parent="." unique_id=2111069520]
+position = Vector2(560, 69.000046)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("4_i43ji")
+destion_final = 400
+
+[node name="nave_inicial1" parent="EnemigosIniciales" unique_id=1328045356 instance=ExtResource("4_eu3iu")]
+position = Vector2(-2810.0005, -1320.001)
+
+[node name="nave_inicial2" parent="EnemigosIniciales" unique_id=1041013057 instance=ExtResource("4_eu3iu")]
+position = Vector2(3089.999, -1350.001)
+
+[node name="PistaAudio" parent="." unique_id=151689774 instance=ExtResource("6_adjju")]
+volume_db = -33.373
+
+[node name="CanvasLayer" parent="." unique_id=379431489 instance=ExtResource("8_uxua8")]
+
+[node name="PantallaPausa" parent="CanvasLayer" unique_id=620146291 instance=ExtResource("8_j8syj")]
+
+[node name="GameController" type="Node2D" parent="." unique_id=1127998166]
+script = ExtResource("9_c6ufc")
+
+[node name="Timer" type="Timer" parent="GameController" unique_id=466089577]
+autostart = true
+
+[node name="Nave" parent="." unique_id=77544392 instance=ExtResource("2_w6qyd")]
+position = Vector2(554.99994, 602.99994)
+
+[node name="TerceraOleada" type="Node2D" parent="." unique_id=465504004]
+position = Vector2(580, -214)
+script = ExtResource("11_j8syj")
+
+[node name="Nave_jefe_final" parent="TerceraOleada" unique_id=1481369433 instance=ExtResource("11_vdios")]
+contact_monitor = true
+max_contacts_reported = 10
+
 [connection signal="timeout" from="SpawnAsteroides/Timer" to="SpawnAsteroides" method="_on_timer_timeout"]
 [connection signal="timeout" from="SpawnAsteroides2/Timer" to="SpawnAsteroides2" method="_on_timer_timeout"]
+[connection signal="timeout" from="SegundaOlaEnemigos/Timer" to="SegundaOlaEnemigos" method="_on_timer_timeout"]
+[connection signal="destroyed" from="SegundaOlaEnemigos/Naves_enemigas" to="GameController" method="_on_naves_enemigas_destroyed"]
+[connection signal="destroyed" from="SegundaOlaEnemigos/Naves_enemigas2" to="GameController" method="_on_naves_enemigas_2_destroyed"]
+[connection signal="destroyed" from="SegundaOlaEnemigos/Naves_enemigas3" to="GameController" method="_on_naves_enemigas_3_destroyed"]
+[connection signal="destroyed" from="EnemigosIniciales/nave_inicial1" to="GameController" method="_on_nave_inicial_1_destroyed"]
+[connection signal="destroyed" from="EnemigosIniciales/nave_inicial2" to="GameController" method="_on_nave_inicial_2_destroyed"]
+[connection signal="boton_disparando" from="CanvasLayer" to="Nave" method="_on_canvas_layer_boton_disparando"]
+[connection signal="all_destroyed" from="GameController" to="TerceraOleada" method="_on_game_controller_all_destroyed"]
+[connection signal="time_restant" from="GameController" to="CanvasLayer" method="_on_game_controller_time_restant"]
+[connection signal="timeout" from="GameController/Timer" to="GameController" method="_on_timer_timeout"]
+[connection signal="life_update" from="Nave" to="CanvasLayer" method="_on_nave_life_update"]
+[connection signal="player_dead" from="Nave" to="GameController" method="_on_nave_player_dead"]
+[connection signal="body_entered" from="TerceraOleada/Nave_jefe_final" to="TerceraOleada/Nave_jefe_final" method="_on_body_entered"]
+[connection signal="destroyed" from="TerceraOleada/Nave_jefe_final" to="GameController" method="_on_nave_jefe_final_destroyed"]

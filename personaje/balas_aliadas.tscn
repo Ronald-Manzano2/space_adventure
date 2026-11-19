@@ -74,17 +74,26 @@ _data = {
 }
 
 [node name="balas_aliadas" type="RigidBody2D" unique_id=1105205315]
+collision_layer = 8
+collision_mask = 38
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 linear_velocity = Vector2(0, -1)
 script = ExtResource("1_d8pyc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1780977706]
 position = Vector2(-0.99999994, 0)
+scale = Vector2(0.09, 0.09)
 texture = SubResource("CompressedTexture2D_xjrvq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1513366228]
-position = Vector2(-2, 33)
+position = Vector2(-0.9999999, 2.9999962)
+scale = Vector2(0.09, 0.09)
 shape = SubResource("CapsuleShape2D_krpui")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=191899749]
 libraries/ = SubResource("AnimationLibrary_mdcyu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

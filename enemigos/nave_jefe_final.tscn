@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://dt7x5lnrw6vig"]
 
-[ext_resource type="Texture2D" uid="uid://crs8gmlsq6k81" path="res://assets/enemigos/jefe_enemigo.png" id="1_rixv2"]
-[ext_resource type="Texture2D" uid="uid://pgdeadrdlhi1" path="res://assets/enemigos/jefe_explotando.png" id="2_148tb"]
-[ext_resource type="AudioStream" uid="uid://bf03qokq6yvlr" path="res://assets/sonido/primera_explosion_jefe.mp3" id="3_ge0ir"]
-[ext_resource type="Texture2D" uid="uid://e6tybqhj58vf" path="res://assets/enemigos/jefe_enemigo_disparando.png" id="4_igjym"]
+[ext_resource type="Script" uid="uid://b2nhldahxvs6h" path="res://enemigos/nave_jefe_final.gd" id="1_ge0ir"]
+[ext_resource type="Texture2D" uid="uid://drv1k261kwraf" path="res://assets/enemigos/jefe_enemigo.png" id="1_rixv2"]
+[ext_resource type="Texture2D" uid="uid://b7c4f0f2tcyec" path="res://assets/enemigos/jefe_explotando.png" id="2_148tb"]
+[ext_resource type="AudioStream" uid="uid://bqu5npsbvf7t4" path="res://assets/sonido/primera_explosion_jefe.mp3" id="3_ge0ir"]
+[ext_resource type="Texture2D" uid="uid://k5q72io66363" path="res://assets/enemigos/jefe_enemigo_disparando.png" id="4_igjym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5bk5"]
 size = Vector2(507, 238)
@@ -80,7 +81,7 @@ tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_ywa4y"]
 resource_name = "disparo"
-loop_mode = 1
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,10 +89,38 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.96666664),
+"times": PackedFloat32Array(0, 0.25, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("1_rixv2"), ExtResource("4_igjym"), ExtResource("1_rixv2")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ataque_derecha"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ataque_izquierda"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3dqh2"]
@@ -102,6 +131,11 @@ _data = {
 }
 
 [node name="Nave_jefe_final" type="RigidBody2D" unique_id=1481369433]
+collision_layer = 2
+collision_mask = 9
+mass = 10000.0
+gravity_scale = 0.0
+script = ExtResource("1_ge0ir")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2128662605]
 texture = ExtResource("1_rixv2")
@@ -114,3 +148,11 @@ shape = SubResource("RectangleShape2D_u5bk5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1400264064]
 libraries/ = SubResource("AnimationLibrary_3dqh2")
+
+[node name="Timer" type="Timer" parent="." unique_id=1531576128]
+
+[node name="arma_derecha" type="Node2D" parent="." unique_id=753285239]
+position = Vector2(-192, -8)
+
+[node name="arma_izquierda" type="Node2D" parent="." unique_id=1422110887]
+position = Vector2(193, -7)

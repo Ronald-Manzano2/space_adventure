@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://gqgjevnf4f0o"]
 
-[ext_resource type="Texture2D" uid="uid://cm51b7dklmji" path="res://assets/enemigos/naves_enemigas.png" id="1_bbqn1"]
-[ext_resource type="Texture2D" uid="uid://brs55mtktoa7j" path="res://assets/enemigos/naves_enemigas_explotando.png" id="2_3tn08"]
-[ext_resource type="Texture2D" uid="uid://vlmg6v5tc04u" path="res://assets/enemigos/naves_enemigas_explotando_2.png" id="3_flvf8"]
-[ext_resource type="AudioStream" uid="uid://b4237oguq7a1r" path="res://assets/sonido/explosion_enemigos.mp3" id="4_8ghhy"]
-[ext_resource type="Texture2D" uid="uid://c80kkminfinyf" path="res://assets/enemigos/naves_enemigas_disparando.png" id="5_wb4n0"]
+[ext_resource type="Texture2D" uid="uid://b8pri6canxxi5" path="res://assets/enemigos/naves_enemigas.png" id="1_bbqn1"]
+[ext_resource type="Script" uid="uid://ceffk75nc01wu" path="res://enemigos/naves_enemigas.gd" id="1_flvf8"]
+[ext_resource type="Texture2D" uid="uid://b87oq5d5psklq" path="res://assets/enemigos/naves_enemigas_explotando.png" id="2_3tn08"]
+[ext_resource type="Texture2D" uid="uid://cxi7neottch2k" path="res://assets/enemigos/naves_enemigas_explotando_2.png" id="3_flvf8"]
+[ext_resource type="AudioStream" uid="uid://dvyqui3wx5uev" path="res://assets/sonido/explosion_enemigos.mp3" id="4_8ghhy"]
+[ext_resource type="Texture2D" uid="uid://bye608c007rm2" path="res://assets/enemigos/naves_enemigas_disparando.png" id="5_wb4n0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5bk5"]
 size = Vector2(128, 150)
@@ -93,6 +94,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("1_bbqn1"), ExtResource("5_wb4n0"), ExtResource("1_bbqn1")]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"atacar"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k8jc2"]
 _data = {
@@ -102,17 +117,29 @@ _data = {
 }
 
 [node name="Naves_enemigas" type="RigidBody2D" unique_id=1775768576]
+collision_layer = 2
+collision_mask = 9
+mass = 10000.0
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 3
+linear_damp = 50.0
+script = ExtResource("1_flvf8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=467448670]
 position = Vector2(0, 3.5)
-scale = Vector2(1, 1.0136719)
+scale = Vector2(0.2, 0.202)
 texture = ExtResource("1_bbqn1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1183490781]
-position = Vector2(0, -65)
+position = Vector2(0, -7.000004)
+scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_u5bk5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=345290357]
 libraries/ = SubResource("AnimationLibrary_k8jc2")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=975530180]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -15,6 +15,10 @@ run/main_scene="uid://btsrh37qbgmwd"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PistaAudio="*uid://o6cyndsfnia0"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -52,6 +56,15 @@ abajo={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194322,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Nave"
+2d_physics/layer_2="NaveEnemiga"
+2d_physics/layer_3="Asteroides"
+2d_physics/layer_4="BalaAliada"
+2d_physics/layer_5="BalaEnemiga"
+2d_physics/layer_6="Bordes"
 
 [physics]
 

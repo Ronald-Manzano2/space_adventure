@@ -20,8 +20,6 @@ func _on_timer_timeout() -> void:
 func generar_enemigo():
 	var asteroide = asteroide1.instantiate() if randf() > 0.5 else asteroide2.instantiate()
 	var rand_position_x = randf_range(50.0, 250.0)
-	asteroide.get_node("Sprite2D").scale = Vector2(0.1, 0.1)
-	asteroide.get_node("CollisionShape2D").scale = Vector2(0.1, 0.1)
 	asteroide.global_position = Vector2(rand_position_x, -100)
 	
 	add_child(asteroide)

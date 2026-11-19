@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vtr5bp3hxir7"]
 
 [ext_resource type="Texture2D" uid="uid://cgustht80nhnx" path="res://assets/enemigos/asteroide_1.png" id="1_0m7xp"]
+[ext_resource type="Script" uid="uid://b5y3fqpyq721f" path="res://enemigos/asteroid_1.gd" id="1_x5vdk"]
 [ext_resource type="Texture2D" uid="uid://d6uq0epsb7wt" path="res://assets/enemigos/asteroide1_explotanto_1.png" id="2_4xubt"]
 [ext_resource type="Texture2D" uid="uid://dklxwlb60oq4c" path="res://assets/enemigos/asteroide1_explotanto_2.png" id="3_x5vdk"]
 [ext_resource type="AudioStream" uid="uid://dvyqui3wx5uev" path="res://assets/sonido/explosion_enemigos.mp3" id="4_oh0k1"]
@@ -84,16 +85,26 @@ _data = {
 }
 
 [node name="Asteroid1" type="RigidBody2D" unique_id=1112086926]
+collision_layer = 4
+collision_mask = 9
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_x5vdk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1488523455]
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_0m7xp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1485751221]
-position = Vector2(15, -13)
+position = Vector2(2.000001, -1.000001)
+scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_u5bk5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1344865142]
 libraries/ = SubResource("AnimationLibrary_m1k0h")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=261140848]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

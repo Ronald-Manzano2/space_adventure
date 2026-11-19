@@ -6,7 +6,7 @@
 load_path = "res://.godot/imported/nave_statica.png-1a6e4174f495b6f0a217e621332376e8.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kddjp"]
-size = Vector2(199.42273, 71.89698)
+size = Vector2(249.71136, 85.0051)
 
 [sub_resource type="Animation" id="Animation_mwl2w"]
 length = 0.001
@@ -97,14 +97,16 @@ _data = {
 }
 
 [node name="Nave" type="CharacterBody2D" unique_id=77544392]
+collision_mask = 54
 script = ExtResource("1_0p1nk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1386707237]
+scale = Vector2(0.1, 0.1)
 texture = SubResource("CompressedTexture2D_q36rg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874580478]
-position = Vector2(-0.5000067, -25.805426)
-scale = Vector2(1.439154, 3.8164213)
+position = Vector2(0, -5)
+scale = Vector2(0.1, 0.265)
 shape = SubResource("RectangleShape2D_kddjp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1835335697]

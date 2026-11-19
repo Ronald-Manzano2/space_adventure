@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c07w8khli1juc"]
 
+[ext_resource type="Script" uid="uid://dbgasydsqmkmc" path="res://enemigos/balas_enemigas.gd" id="1_8lk2y"]
 [ext_resource type="Texture2D" uid="uid://ctjkk1it8oamx" path="res://assets/enemigos/municion_enemiga_chocando_1.png" id="1_hsm3n"]
 [ext_resource type="Texture2D" uid="uid://dkiwh7vrkidso" path="res://assets/enemigos/municion_enemiga_chocando_2.png" id="2_8lk2y"]
 [ext_resource type="Texture2D" uid="uid://dge4j7rnxn4py" path="res://assets/enemigos/municion_enemiga_chocando_3.png" id="3_vesdf"]
@@ -73,13 +74,23 @@ _data = {
 }
 
 [node name="balas_enemigas" type="RigidBody2D" unique_id=1086714431]
+collision_layer = 16
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_8lk2y")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=471384107]
+scale = Vector2(0.09, 0.09)
 texture = SubResource("CompressedTexture2D_lf1x5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954022172]
-position = Vector2(-1, -32)
+position = Vector2(-5.9604645e-08, -3.000002)
+scale = Vector2(0.09, 0.09)
 shape = SubResource("CapsuleShape2D_krpui")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2073498288]
 libraries/ = SubResource("AnimationLibrary_h6ulv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
